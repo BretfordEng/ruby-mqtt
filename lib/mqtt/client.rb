@@ -263,6 +263,12 @@ class MQTT::Client
         end
 
         @socket = OpenSSL::SSL::SSLSocket.new(tcp_socket, ssl_context)
+
+        unless @hostname.nil?
+          @socket.hostname = @hostname
+        end
+
+
         @socket.sync_close = true
         @socket.connect
       else
